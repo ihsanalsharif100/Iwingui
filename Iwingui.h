@@ -30,6 +30,7 @@ struct Buttondata {
 
     string Class = "BUTTON";
     string name = "DO NOT CLICK";//you will be confused if you forgot to put a name
+    string onclick = "function";
 
     int x = 50;
     int y = 50;
@@ -50,20 +51,35 @@ struct menuitemdata{
     vector<UINT> poptype = {MF_STRING , MF_STRING /*MF_SEPARATOR*/ , MF_STRING};
 };
 
-struct Action {
-    int id;
+struct onclickdata {
+    HWND hwnd;
+    UINT msg;
+    WPARAM wParam;
+    LPARAM lParam;
+};
+
+struct actiondata{
+    int id = 0;
     void (*func)(HWND);
 };
 
-extern Action actions[];
-extern int actionCount;
+inline vector<actiondata> actionlist = {};
 
-//this is a forward declaration
-//it allows code to run functions before they are declared
-//like idk how to explain it is obvious
-int loadUI(HWND hwnd,LPARAM lParam);//this is a function
+//std::array<Action, 5> actions = { ... };
+////         ^^^^^^  ^             ^^^^^
+////         type    size          initial values
+//now since when was Action a type??
 
-//some say use void makebutton(const Buttondata& data)
+int loadUI(HWND hwnd, LPARAM lParam);
+
+
+
+//LRESULT is a dumb int
+LRESULT callback(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+
+
+//some say use "int makebutton(const Buttondata& data)"
 //i will not out of spite
 void makebutton(Buttondata data){
     CreateWindow (
@@ -80,7 +96,6 @@ void makebutton(Buttondata data){
             NULL);
 }
 
-
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch(msg){
         case(WM_CREATE):
@@ -90,11 +105,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         case(WM_COMMAND): {
             int id = LOWORD(wParam);
             int code = HIWORD(wParam);
+            int size_action = actionlist.size();
 
             if (code == BN_CLICKED) {
-                for (int i = 0; i < actionCount; i++) {
-                    if (actions[i].id == id) {
-                        actions[i].func(hwnd);
+                for (int i = 0; i < size_action; i++) {
+                    if (actionlist[i].id == id) {
+                        actionlist[i].func(hwnd);
                         break;
                     }
                 }
@@ -105,6 +121,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         case(WM_DESTROY):
             PostQuitMessage(0);
             return 0;
+        default:
+            callback(hwnd, msg, wParam, lParam);
+            break;
     }
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
