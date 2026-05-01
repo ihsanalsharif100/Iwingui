@@ -46,7 +46,7 @@ struct menuitemdata{
 
     string name = "stop using default names";
 
-    vector<string> popnames = {"ahmad" , "hello?" , "just write somthing"};
+    vector<string> popnames = {"Ihsan" , "hello?" , "just write somthing"};
     vector<int> popids = {3,4,5};//every number needs an id
     vector<UINT> poptype = {MF_STRING , MF_STRING /*MF_SEPARATOR*/ , MF_STRING};
 };
