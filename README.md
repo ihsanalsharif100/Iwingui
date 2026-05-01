@@ -4,6 +4,14 @@ this is an exsample for now
 ```C++
 #include "Iwingui.h"
 
+void onButton1(HWND hwnd) {
+    MessageBox(hwnd, "Button 1 clicked", "Info", MB_OK);
+}
+
+void onButton2(HWND hwnd) {
+    MessageBox(hwnd, "Button 2 clicked", "Info", MB_OK);
+}
+
 int loadUI(HWND hwnd,LPARAM lParam){
     menuitemdata data;
     data.hwnd = hwnd;
@@ -14,6 +22,17 @@ int loadUI(HWND hwnd,LPARAM lParam){
     button.hInstance = ((LPCREATESTRUCT)lParam)->hInstance;
     button.hwnd = hwnd;
     makebutton(button);
+
+    //vector<actiondata>
+    actionlist = {//the functions always have to be before naming them
+        {1, onButton1},
+        {2, onButton2}
+    };
+
+    return 1;
+}
+
+LRESULT callback(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam){
     return 1;
 }
 
@@ -26,19 +45,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
     MakeApp(app);
     return 0;
 }
-
-void onButton1(HWND hwnd) {
-    MessageBox(hwnd, "Button 1 clicked", "Info", MB_OK);
-}
-
-void onButton2(HWND hwnd) {
-    MessageBox(hwnd, "Button 2 clicked", "Info", MB_OK);
-}
-
-Action actions[] = {
-    {1, onButton1},
-    {2, onButton2}
-};
-int actionCount = sizeof(actions) / sizeof(actions[0]);
 
 ```
