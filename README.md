@@ -15,8 +15,9 @@ comctl32
 ```
 no need to add anything else
 # how to use
+## making a window
 first you will need to make this function
-```
+```C++
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
 ```
 this function is like int main but for the win32 gui
@@ -46,3 +47,93 @@ then nCmdShow(in app variable) takes the value of nCmdShow from win32gui
 then it runs the function MakeApp and gives it the app variable
 
 the function does the rest
+
+## making a button
+after using the WinMain function to make a window you can't use it more unless you run MakeApp(app); in a defrent thread
+so *don't use it*
+use loudui function
+
+```C++
+int loadUI(HWND hwnd,LPARAM lParam)
+```
+use the loudui function to deal with loading the ui
+exsample
+```C++
+void onButton1(HWND hwnd) {//onclick command
+    MessageBox(hwnd, "Button 1 clicked", "Info", MB_OK);
+}
+
+void onButton2(HWND hwnd) {
+    MessageBox(hwnd, "Button 2 clicked", "Info", MB_OK);
+}
+
+int loadUI(HWND hwnd,LPARAM lParam){
+    menuitemdata data;
+    data.hwnd = hwnd;
+    menuitem(data);
+
+    Buttondata button;
+    //make sure to allways write the next 2 lines
+    button.hInstance = ((LPCREATESTRUCT)lParam)->hInstance;
+    button.hwnd = hwnd;
+    makebutton(button);
+
+    //vector<actiondata>
+    actionlist = {//the functions always have to be before naming them
+        {1, onButton1},
+        {2, onButton2}
+    };
+
+    return 1;
+}
+```
+you have to gave name_you_choose.hwnd the value hwnd so it loads up for you
+and also_name_you_choose.hInstance the value ((LPCREATESTRUCT)lParam)->hInstance;
+and then you can call the function of what you want
+menuitem is for when you want a menu and makebutton is for everything else
+
+use actionlist when you want to gave a button an on click command
+
+## note:it is good to gave your buttons a name and you can give it a class if you want somthing else you can see how in the other examples
+
+# other ui examples
+```C++
+void onButton1(HWND hwnd) {
+    MessageBox(hwnd, "Button 1 clicked", "Info", MB_OK);
+}
+
+void onButton2(HWND hwnd) {
+    MessageBox(hwnd, "Button 2 clicked", "Info", MB_OK);
+}
+
+int loadUI(HWND hwnd,LPARAM lParam){
+    menuitemdata data;
+    data.hwnd = hwnd;
+    data.name = "the item name";
+    data.popids = {1,2};
+    data.popnames = {"hello" , "you can put any thing" , "this has no id" , "" , "but it still works"};
+    data.poptype = {MF_STRING , MF_STRING , MF_STRING , MF_SEPARATOR , MF_STRING};
+    menuitem(data);
+
+    Buttondata button;
+    button.hInstance = ((LPCREATESTRUCT)lParam)->hInstance;
+    button.hwnd = hwnd;
+    button.Class = "BUTTON";
+    button.height = 34;
+    button.id = 3;
+    button.name = "i can name this button!!";
+    button.style = WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON;
+    button.width = 63;
+    button.x = 45;
+    button.y = 100;
+    makebutton(button);
+
+    //vector<actiondata>
+    actionlist = {//the functions always have to be before naming them
+        {1, onButton1},
+        {2, onButton2}
+    };
+
+    return 1;
+}
+```
