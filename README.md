@@ -94,7 +94,7 @@ menuitem is for when you want a menu and makebutton is for everything else
 
 use actionlist when you want to gave a button an on click command
 
-## note:it is good to gave your buttons a name and you can give it a class if you want somthing else you can see how in the other examples
+note:it is good to gave your buttons a name and you can give it a class if you want somthing else other then a button you can see how in the other examples
 
 # other ui examples
 ```C++
