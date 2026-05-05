@@ -1,6 +1,9 @@
+<img width="1024" height="768" alt="concept logo" src="https://github.com/user-attachments/assets/b5afc5d9-897d-40e9-b5ff-ea933ee5fa0a" />
+
 # Iwingui
 A lightweight C++ header for building native Windows UIs without the usual Win32 hassle.
-this is an exsample for now
+
+exsample:
 ```C++
 #include "Iwingui.h"
 
@@ -42,3 +45,5 @@ Action actions[] = {
 int actionCount = sizeof(actions) / sizeof(actions[0]);
 
 ```
+
+###### note:V1.1.0 was released before i was done with the readme so it is unfinished.
