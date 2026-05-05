@@ -23,6 +23,13 @@ user32
 kernel32
 comctl32
 ```
+or you could write this in the other linker settings if you want
+```other linker settings
+-lgdi32
+-luser32
+-lkernel32
+-lcomctl32
+```
 no need to add anything else
 # how to use
 ## making a window
