@@ -1,7 +1,7 @@
 <!-- <img width="324" height="324" alt="Copy of Iwingui (1)" src="https://github.com/user-attachments/assets/d3437819-8d1e-4507-9cdb-0211f554efa5" style="anchor:center" /> -->
 <div align="center">
   <a><!-- i might have a website later so i will lave it just in case -->
-    <picture>
+    <picture><!-- i think we could make this code batter but not now-->
       <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/d3437819-8d1e-4507-9cdb-0211f554efa5">
         <!-- i am unsure about this but it was in the next.js readme and they have a very good readme -->
       <img alt="Iwingui logo" src="https://github.com/user-attachments/assets/d3437819-8d1e-4507-9cdb-0211f554efa5" height="128">
