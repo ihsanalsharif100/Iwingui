@@ -5,11 +5,6 @@
 #include <string>
 #include <vector>
 
-//i can't find the goals but i did more then needed
-//make a function for a button [done]
-//an onclick function [done]
-//make code good enough to be a .h file or a .a [dpne]
-
 using namespace std;
 
 struct Appdata {
