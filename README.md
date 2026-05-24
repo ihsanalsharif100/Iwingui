@@ -124,11 +124,12 @@ void onButton2(HWND hwnd) {
 
 int loadUI(HWND hwnd,LPARAM lParam){
     menuitemdata data;
-    data.hwnd = hwnd;//just add what you want to the button
+    data.hwnd = hwnd;
     data.name = "the item name";
     data.popids = {1,2};
     data.popnames = {"hello" , "you can put any thing" , "this has no id" , "" , "but it still works"};
     data.poptype = {MF_STRING , MF_STRING , MF_STRING , MF_SEPARATOR , MF_STRING};
+    //just add what you want to the menu
     menuitem(data);
 
     Buttondata button;
@@ -142,6 +143,7 @@ int loadUI(HWND hwnd,LPARAM lParam){
     button.width = 63;
     button.x = 45;
     button.y = 100;
+    //just add what you want to the button
     makebutton(button);
 
     //vector<actiondata>
