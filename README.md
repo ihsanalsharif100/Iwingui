@@ -39,8 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
 ```
 this function is like int main but for the win32 gui
 
-exsample code looks like this
-
+exsample function:
 ```C++
 //this is like int main in normal C++
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
@@ -52,12 +51,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
     return 0;
 }
 ```
-that creates an empty window
-"Appdata app;" makes a variable with the structure of AppData
-Appdata is defined in the header
+that creates an empty window.
+"Appdata app" makes a variable with the structure of AppData
+Appdata is obviously defined inside the header
 
-then it gives hInstance variable in the app variable the value of hInstance
-hInstance was defined from win32 gui
+then it gives hInstance variable the value of hInstance
+hInstance value was defined from the win32 gui
 
 then nCmdShow(in app variable) takes the value of nCmdShow from win32gui
 
@@ -68,12 +67,12 @@ the function does the rest
 ## making a button
 after using the WinMain function to make a window you can't use it more unless you run MakeApp(app); in a defrent thread
 so *don't use it*
-use loudui function
+use the loadUI function
 
 ```C++
 int loadUI(HWND hwnd,LPARAM lParam)
 ```
-use the loudui function to deal with loading the ui
+use the loadUI function to deal with loading the ui
 exsample
 ```C++
 void onButton1(HWND hwnd) {//onclick command
@@ -107,7 +106,7 @@ int loadUI(HWND hwnd,LPARAM lParam){
 you have to gave name_you_choose.hwnd the value hwnd so it loads up for you
 and also_name_you_choose.hInstance the value ((LPCREATESTRUCT)lParam)->hInstance;
 and then you can call the function of what you want
-menuitem is for when you want a menu and makebutton is for everything else
+menuitem is for making a menu, makebutton is for everything else
 
 use actionlist when you want to gave a button an on click command
 
@@ -125,7 +124,7 @@ void onButton2(HWND hwnd) {
 
 int loadUI(HWND hwnd,LPARAM lParam){
     menuitemdata data;
-    data.hwnd = hwnd;
+    data.hwnd = hwnd;//just add what you want to the button
     data.name = "the item name";
     data.popids = {1,2};
     data.popnames = {"hello" , "you can put any thing" , "this has no id" , "" , "but it still works"};
